@@ -1,0 +1,7 @@
+language: ruby
+rvm:
+ - 2.2.3
+cache: bundler
+addons:
+  code_climate:
+    repo_token: 30f9e75b5489c3f24bfcf45645c90f6394f17817d0b0eb6d5eae985c1b1ffe34 bundle exec rspec

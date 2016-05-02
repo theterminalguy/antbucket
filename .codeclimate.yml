@@ -1,0 +1,14 @@
+languages:
+   Ruby: true
+engines:
+  rubocop:
+    enabled: true
+ratings:
+   paths:
+   - app/**
+   - lib/**
+   - "**.rb"
+   - "**.go"
+exclude_paths:
+- spec/**/*
+- vendor/**/*
