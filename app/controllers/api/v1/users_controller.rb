@@ -1,6 +1,7 @@
 module Api 
   module V1 
     class UsersController < ApplicationController
+      before_action :authenticate, only: [:update, :destroy]
       skip_before_action :verify_authenticity_token
       respond_to :json 
 
@@ -13,7 +14,6 @@ module Api
           render json: { errors: @user.errors }, status: 422
         end
       end
-
 
       def user_params
         params.permit(:email, :password) 
