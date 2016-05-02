@@ -23,7 +23,7 @@ All our dependencies can be found in our Gemfile. To see a list of all our depen
 </tr>
 
 <tr>
-  <td>POST /api/v1/user: </td>
+  <td>POST /api/v1/users: </td>
   <td>Create a new user</td>
 </tr>
 
@@ -112,17 +112,17 @@ Some end points are not available public and here they are listed below
 </tr>
 
 <tr>
-	<td>GET /auth/login: </td>
+	<td>POST /users: </td>
 	<td>TRUE</td>
 </tr>
 
 <tr>
-	<td>GET /auth/login: </td>
+	<td>POST /auth/login: </td>
 	<td>FALSE</td>
 </tr>
 
 <tr>
-	<td>GET /auth/logout:</td>
+	<td>DELETE /auth/logout:</td>
 	<td>FALSE</td>
 </tr>
 

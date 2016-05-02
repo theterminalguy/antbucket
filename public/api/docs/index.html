@@ -1,0 +1,919 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>AntBucket API Reference</title>
+
+    <style>
+      .highlight table td { padding: 5px; }
+.highlight table pre { margin: 0; }
+.highlight, .highlight .w {
+  color: #f8f8f2;
+  background-color: #272822;
+}
+.highlight .err {
+  color: #151515;
+  background-color: #ac4142;
+}
+.highlight .c, .highlight .cd, .highlight .cm, .highlight .c1, .highlight .cs {
+  color: #505050;
+}
+.highlight .cp {
+  color: #f4bf75;
+}
+.highlight .nt {
+  color: #f4bf75;
+}
+.highlight .o, .highlight .ow {
+  color: #d0d0d0;
+}
+.highlight .p, .highlight .pi {
+  color: #d0d0d0;
+}
+.highlight .gi {
+  color: #90a959;
+}
+.highlight .gd {
+  color: #ac4142;
+}
+.highlight .gh {
+  color: #6a9fb5;
+  background-color: #151515;
+  font-weight: bold;
+}
+.highlight .k, .highlight .kn, .highlight .kp, .highlight .kr, .highlight .kv {
+  color: #aa759f;
+}
+.highlight .kc {
+  color: #d28445;
+}
+.highlight .kt {
+  color: #d28445;
+}
+.highlight .kd {
+  color: #d28445;
+}
+.highlight .s, .highlight .sb, .highlight .sc, .highlight .sd, .highlight .s2, .highlight .sh, .highlight .sx, .highlight .s1 {
+  color: #90a959;
+}
+.highlight .sr {
+  color: #75b5aa;
+}
+.highlight .si {
+  color: #8f5536;
+}
+.highlight .se {
+  color: #8f5536;
+}
+.highlight .nn {
+  color: #f4bf75;
+}
+.highlight .nc {
+  color: #f4bf75;
+}
+.highlight .no {
+  color: #f4bf75;
+}
+.highlight .na {
+  color: #6a9fb5;
+}
+.highlight .m, .highlight .mf, .highlight .mh, .highlight .mi, .highlight .il, .highlight .mo, .highlight .mb, .highlight .mx {
+  color: #90a959;
+}
+.highlight .ss {
+  color: #90a959;
+}
+    </style>
+    <link href="stylesheets/screen.css" rel="stylesheet" media="screen" />
+    <link href="stylesheets/print.css" rel="stylesheet" media="print" />
+      <script src="javascripts/all.js"></script>
+  </head>
+
+  <body class="index" data-languages="[&quot;shell&quot;]">
+    <a href="#" id="nav-button">
+      <span>
+        NAV
+        <img src="images/navbar.png" />
+      </span>
+    </a>
+    <div class="tocify-wrapper">
+      <img src="images/ant.png" />
+        <div class="lang-selector">
+              <a href="#" data-language-name="shell">cURL</a>
+        </div>
+        <div class="search">
+          <input type="text" class="search" id="input-search" placeholder="Search">
+        </div>
+        <ul class="search-results"></ul>
+      <div id="toc">
+      </div>
+        <ul class="toc-footer">
+            <li><a href='#'>Sign Up for a Developer Key</a></li>
+            <li><a href='https://github.com/tripit/slate'>Documentation Powered by Slate</a></li>
+        </ul>
+    </div>
+    <div class="page-wrapper">
+      <div class="dark-box"></div>
+      <div class="content">
+        <h1 id="introduction">Introduction</h1>
+
+<p><a href="https://coveralls.io/github/andela-sdamian/antbucket?branch=master"><img alt="Coverage Status" src="https://coveralls.io/repos/github/andela-sdamian/antbucket/badge.svg?branch=master" /></a> <a href="https://codeclimate.com/github/andela-sdamian/antbucket"><img alt="Code Climate" src="https://codeclimate.com/github/andela-sdamian/antbucket/badges/gpa.svg" /></a> <a href="https://travis-ci.org/andela-sdamian/antbucket"><img alt="Build Status" src="https://travis-ci.org/andela-sdamian/antbucket.svg?branch=master" /></a></p>
+
+<p>Welcome to the AntBucket API. You can use our API to access various endpoints which includes (bucketlists and items). The bucketlists end point houses a collection of various items, while the items endpoints belongs to a bucketlist. </p>
+
+<p>Endpoints data is returned in JSON format, and whenever you make a request to an endpoint that does not exist, we do our best to handle such scenairos by returning a freindly JSON formated error message. </p>
+
+<p>You can checkout our <a href="https://github.com/andela-sdamian/antbucket">GitHub</a> repository if you want to contribute or raise an issue. </p>
+
+<h3>Available End Points</h3>
+
+<aside class="success">
+NOTE: The API is currently at version 1, so ensure you prefix each endpoint with &ldquo;api/v1/&rdquo; to access them.
+</aside>
+
+<table>
+<tr>
+    <th>End Point</th>
+    <th>Function</th>
+</tr>
+
+<tr>
+  <td>POST /users: </td>
+  <td>Create a new user</td>
+</tr>
+
+
+<tr>
+    <td>POST /auth/login: </td>
+    <td>Logs in a user</td>
+</tr>
+
+<tr>
+    <td>DELETE /auth/logout:</td>
+    <td>Logs out a user</td>
+</tr>
+
+<tr>
+    <td>POST /bucketlists:</td>
+    <td>Creates a new bucket list</td>
+</tr>
+
+<tr>
+    <td>GET /bucketlists:</td>
+    <td>Lists all the created bucket lists</td>
+</tr>
+
+<tr>
+    <td>GET /bucketlists/(id):</td>
+    <td>Gets a single bucket list</td>
+</tr>
+
+<tr>
+    <td>PUT /bucketlists/(id):</td>
+    <td>Updates this single bucket list</td>
+</tr>
+
+<tr>
+    <td>DELETE /bucketlists/(id):</td>
+    <td>Deletes this single bucket list</td>
+</tr>
+
+<tr>
+    <td>POST /bucketlists/(id)/items:</td>
+    <td>Creates a new item in bucket list</td>
+</tr>
+
+<tr>
+    <td>PUT /bucketlists/(id)/items/(item_id):</td>
+    <td>Updates a bucket list item</td>
+</tr>
+
+<tr>
+    <td>DELETE /bucketlists/(id)/items/(item_id):</td>
+    <td>Deletes an item in a bucket list</td>
+</tr>
+
+</table>
+
+<h1 id="authentication">Authentication</h1>
+
+<h2 id="creating-a-user">Creating a User</h2>
+
+<blockquote>
+<p>HTTP Status: 201 </p>
+</blockquote>
+<pre class="highlight shell"><code>curl -X POST -d <span class="s2">"email=john@doe.com&amp;password=password"</span> <span class="se">\</span>
+https://antbucket.herokuapp.com/api/v1/users
+</code></pre>
+
+<blockquote>
+<p>The above should return JSON data in the format </p>
+</blockquote>
+<pre class="highlight json"><code><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"john@doe.com"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-04-29T12:54:49.785Z"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-04-29T12:54:49.785Z"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+
+</span></code></pre>
+
+<p>To use our API, you will have to create an account simply by sending a <code class="prettyprint">POST</code> request to the appropriate endpoint</p>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">POST https://antbucket.herokuapp.com/api/v1/users</code></p>
+
+<h3 id="query-parameters">Query Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>email</td>
+<td>a valid email in the format xxx@domain.com</td>
+</tr>
+<tr>
+<td>password</td>
+<td>a valid string with a minium of 7 characters</td>
+</tr>
+</tbody></table>
+
+<p><a href="https://antbucket.herokuapp.com/tester" target="_blank">Try it out</a></p>
+
+<aside class="success">
+Remember request must be of type POST
+</aside>
+
+<h2 id="user-login">User Login</h2>
+
+<blockquote>
+<p>HTTP Status: 200 </p>
+</blockquote>
+<pre class="highlight shell"><code>curl -X POST -d <span class="s2">"email=john@doe.com&amp;password=password"</span> <span class="se">\</span>
+https://antbucket.herokuapp.com/api/v1/auth/login
+</code></pre>
+
+<blockquote>
+<p>The above should return JSON data in the format </p>
+</blockquote>
+<pre class="highlight json"><code><span class="w">  </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"user_email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"john@doe.com"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"token"</span><span class="p">:</span><span class="w"> </span><span class="s2">"xkdsjf8329384929xkls02032032zndd39fsk!23"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">POST https://antbucket.herokuapp.com/api/v1/auth/login</code> </p>
+
+<p>After successfull account creation, you should login to verify your  account and get a token. This token would be used for subsequent request sent to the server. </p>
+
+<h3 id="query-parameters">Query Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>email</td>
+<td>a valid email in the format xxx@domain.com</td>
+</tr>
+<tr>
+<td>password</td>
+<td>a valid string with a minimu of 7 characters</td>
+</tr>
+</tbody></table>
+
+<p><a href="https://antbucket.herokuapp.com/tester" target="_blank">Try it out</a></p>
+<h2 id="user-logout">User Logout</h2>
+
+<blockquote>
+<p>HTTP Status: 422</p>
+</blockquote>
+<pre class="highlight shell"><code>curl -i -X DELETE https://antbucket.herokuapp.com/api/v1/auth/logout <span class="se">\</span>
+-H <span class="s2">"token: 029kdfsa0932a.xlkdsfiosdfds"</span>
+</code></pre>
+
+<blockquote>
+<p>The above should return JSON data in the format </p>
+</blockquote>
+<pre class="highlight json"><code><span class="w">  </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"signed out sucessfully"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">DELETE https://antbucket.herokuapp.com/api/v1/auth/logout</code> </p>
+
+<p>When a user is done, you may want to expire the user session, simply send a delete request to the server </p>
+
+<h3 id="headers">Headers</h3>
+
+<table><thead>
+<tr>
+<th>Header</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>token</td>
+<td>a valid user token</td>
+</tr>
+</tbody></table>
+
+<p><a href="https://antbucket.herokuapp.com/tester" target="_blank">Try it out</a></p>
+<aside>
+Please ensure you pass in a valid user token or you may not be able to end a user session 
+</aside>
+
+<h1 id="bucket-list">Bucket List</h1>
+
+<h2 id="creating-a-bucketlist">Creating a bucketlist</h2>
+
+<blockquote>
+<p>HTTP Status: 201 </p>
+</blockquote>
+<pre class="highlight shell"><code>curl -i -X POST -d <span class="s2">"name=my bucket list"</span> <span class="se">\</span>
+https://antbucket.herokuapp.com/api/v1/ <span class="se">\</span>
+-H <span class="s2">"token: 029kdfsa0932a.xlkdsfiosdfds"</span>
+</code></pre>
+
+<blockquote>
+<p>The above should return JSON data in the format </p>
+</blockquote>
+<pre class="highlight json"><code><span class="w">  </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"My Bucket List"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-04-29T12:54:49.785Z"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-04-29T12:54:49.785Z"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">POST https://antbucket.herokuapp.com/api/v1/bucket_lists</code> </p>
+
+<h3 id="query-parameters">Query Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>name</td>
+<td>a valid name</td>
+</tr>
+</tbody></table>
+
+<h3 id="headers">Headers</h3>
+
+<table><thead>
+<tr>
+<th>Header</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>token</td>
+<td>a valid user token</td>
+</tr>
+</tbody></table>
+
+<p><a href="https://antbucket.herokuapp.com/tester" target="_blank">Try it out</a></p>
+
+<aside class="success">
+Remember request must be of type POST
+</aside>
+
+<h2 id="fetching-all-bucket-lists">Fetching all bucket lists</h2>
+
+<blockquote>
+<p>HTTP Status: 200 </p>
+</blockquote>
+<pre class="highlight shell"><code>curl -i -X GET https://antbucket.herokuapp.com/api/v1/bucket_lists <span class="se">\</span>
+-H <span class="s2">"token: 029kdfsa0932a.xlkdsfiosdfds"</span>
+</code></pre>
+
+<blockquote>
+<p>The above should return JSON data in the format </p>
+</blockquote>
+<pre class="highlight json"><code><span class="w">  </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"total"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> 
+    </span><span class="nt">"page"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> 
+    </span><span class="nt">"bucket_lists"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"id"</span><span class="p">:</span><span class="w">  </span><span class="s2">"2"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"cooking"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"created_at"</span><span class="p">:</span><span class="s2">"2016-04-23T14:22:46.984Z"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="s2">"2016-04-23T16:36:56.869Z"</span><span class="w"> 
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"3"</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2"</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"name"</span><span class="p">:</span><span class="s2">"Get Married"</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"created_at"</span><span class="p">:</span><span class="s2">"2016-04-23T16:35:23.841Z"</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="s2">"2016-04-23T16:35:23.841Z"</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">GET https://antbucket.herokuapp.com/api/v1/bucket_lists</code> </p>
+
+<p>This should return all bucketlist created by the user</p>
+
+<h3 id="headers">Headers</h3>
+
+<table><thead>
+<tr>
+<th>Header</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>token</td>
+<td>a valid user token</td>
+</tr>
+</tbody></table>
+
+<p><a href="https://antbucket.herokuapp.com/tester" target="_blank">Try it out</a></p>
+<h2 id="fetching-a-bucket-list">Fetching a bucket list</h2>
+
+<blockquote>
+<p>HTTP Status: 200 </p>
+</blockquote>
+<pre class="highlight shell"><code>curl -i -X GET https://antbucket.herokuapp.com/api/v1/bucket_lists/1 <span class="se">\</span>
+-H <span class="s2">"token: 029kdfsa0932a.xlkdsfiosdfds"</span>
+</code></pre>
+
+<blockquote>
+<p>The above should return JSON data in the format </p>
+</blockquote>
+<pre class="highlight json"><code><span class="w">  </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"3"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Get Married"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"created_at"</span><span class="p">:</span><span class="s2">"2016-04-23T16:35:23.841Z"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="s2">"2016-04-23T16:35:23.841Z"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">GET https://antbucket.herokuapp.com/api/v1/bucket_lists/1</code> </p>
+
+<p>This should return a bucketlist created by the user with bucket list id of 1 </p>
+
+<h3 id="headers">Headers</h3>
+
+<table><thead>
+<tr>
+<th>Header</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>token</td>
+<td>a valid user token</td>
+</tr>
+</tbody></table>
+
+<aside class="success">
+Remember to pass a valid id in this case 1 
+</aside>
+
+<p><a href="https://antbucket.herokuapp.com/tester" target="_blank">Try it out</a></p>
+<h2 id="search-by-name">Search by name</h2>
+
+<blockquote>
+<p>HTTP Status: 200 </p>
+</blockquote>
+<pre class="highlight shell"><code>curl -i -X GET -d <span class="s2">"q=Get Married"</span> https://antbucket.herokuapp.com/api/v1/bucket_lists <span class="se">\</span>
+-H <span class="s2">"token: 029kdfsa0932a.xlkdsfiosdfds"</span>
+</code></pre>
+
+<blockquote>
+<p>The above should return JSON data in the format </p>
+</blockquote>
+<pre class="highlight json"><code><span class="w">
+    </span><span class="p">{</span><span class="w">
+         </span><span class="nt">"id"</span><span class="p">:</span><span class="w">  </span><span class="s2">"2"</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2"</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Get married"</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"created_at"</span><span class="p">:</span><span class="s2">"2016-04-23T14:22:46.984Z"</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="s2">"2016-04-23T16:36:56.869Z"</span><span class="w"> 
+    </span><span class="p">}</span><span class="w">
+
+</span></code></pre>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">GET https://antbucket.herokuapp.com/api/v1/bucket_lists</code> </p>
+
+<p>This should return all bucketlist created by the user</p>
+
+<h3 id="query-parameters">Query Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>name</td>
+<td>a valid bucket list name</td>
+</tr>
+</tbody></table>
+
+<p><a href="https://antbucket.herokuapp.com/tester" target="_blank">Try it out</a></p>
+
+<h2 id="fetch-by-pagination">Fetch by pagination</h2>
+
+<blockquote>
+<p>HTTP Status: 200 </p>
+</blockquote>
+<pre class="highlight shell"><code>curl -i -X GET -d <span class="s2">"page=2&amp;limit=20"</span> https://antbucket.herokuapp.com/api/v1/bucket_lists <span class="se">\</span>
+-H <span class="s2">"token: 029kdfsa0932a.xlkdsfiosdfds"</span>
+</code></pre>
+
+<blockquote>
+<p>The above should return JSON data in the format </p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"total"</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"page"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"bucket_lists"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Get Married"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-04-23T16:35:23.841Z"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-04-30T04:36:32.852Z"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">12</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Go skiing"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-04-26T10:32:22.661Z"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-04-26T10:32:22.661Z"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+</span></code></pre>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">GET https://antbucket.herokuapp.com/api/v1/bucket_lists</code> </p>
+
+<p>This should return all bucketlist based on the parameter specified </p>
+
+<h3 id="query-parameters">Query Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>page</td>
+<td>a page to start from</td>
+</tr>
+<tr>
+<td>limit</td>
+<td>number of records to return</td>
+</tr>
+</tbody></table>
+
+<p><a href="https://antbucket.herokuapp.com/tester" target="_blank">Try it out</a></p>
+
+<h2 id="updating-a-bucket-list">Updating a bucket list</h2>
+
+<blockquote>
+<p>HTTP Status: 200</p>
+</blockquote>
+<pre class="highlight shell"><code>curl -i -X PUT -d <span class="s2">"name=Have a baby"</span> https://antbucket.herokuapp.com/api/v1/bucket_lists/1 <span class="se">\</span>
+-H <span class="s2">"token: 029kdfsa0932a.xlkdsfiosdfds"</span>
+</code></pre>
+
+<blockquote>
+<p>The above should return JSON data in the format </p>
+</blockquote>
+<pre class="highlight json"><code><span class="w">  </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"3"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Have a baby"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-04-23T16:35:23.841Z"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-04-23T16:35:23.841Z"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">PUT https://antbucket.herokuapp.com/api/v1/bucket_lists/1</code> </p>
+
+<p>This should update bucket list with id 1</p>
+
+<h3 id="query-parameters">Query Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>name</td>
+<td>a valid name</td>
+</tr>
+</tbody></table>
+
+<aside class="success">
+Remember to pass a valid id in this case 1 
+</aside>
+
+<p><a href="https://antbucket.herokuapp.com/tester" target="_blank">Try it out</a></p>
+
+<h2 id="deleting-a-bucket-list">Deleting a bucket list</h2>
+
+<blockquote>
+<p>HTTP Status: 410</p>
+</blockquote>
+<pre class="highlight shell"><code>curl -i -X DELETE https://antbucket.herokuapp.com/api/v1/bucket_lists/1 <span class="se">\</span>
+-H <span class="s2">"token: 029kdfsa0932a.xlkdsfiosdfds"</span>
+</code></pre>
+
+<blockquote>
+<p>The above should return JSON data in the format </p>
+</blockquote>
+<pre class="highlight json"><code><span class="w">  </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"deleted successfully"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">DELETE https://antbucket.herokuapp.com/api/v1/bucket_lists/1</code> </p>
+
+<p>This should delete bucket list with id 1</p>
+
+<h3 id="query-parameters">Query Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>name</td>
+<td>a valid name</td>
+</tr>
+</tbody></table>
+
+<aside class="success">
+Remember to pass a valid id in this case 1 
+</aside>
+
+<h3 id="query-parameters">Query Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>name</td>
+<td>a valid name</td>
+</tr>
+</tbody></table>
+
+<p><a href="https://antbucket.herokuapp.com/tester" target="_blank">Try it out</a></p>
+
+<h1 id="items">Items</h1>
+
+<h2 id="creating-an-item">Creating an item</h2>
+
+<blockquote>
+<p>HTTP Status: 201 </p>
+</blockquote>
+<pre class="highlight shell"><code>curl -i -X POST -d <span class="s2">"name=start dating"</span> <span class="se">\</span>
+https://antbucket.herokuapp.com/api/v1/bucket_lists/1/items <span class="se">\</span>
+-H <span class="s2">"token: 029kdfsa0932a.xlkdsfiosdfds"</span>
+</code></pre>
+
+<blockquote>
+<p>The above should return JSON data in the format </p>
+</blockquote>
+<pre class="highlight json"><code><span class="w">  </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"start dating"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-04-29T12:54:49.785Z"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-04-29T12:54:49.785Z"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>To use our API, you will have to create an account simply by sending a <code class="prettyprint">POST</code> request to the appropriate endpoint</p>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">POST https://antbucket.herokuapp.com/api/v1/bucket_lists/1/items</code> </p>
+
+<h3 id="query-parameters">Query Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>name</td>
+<td>a valid name</td>
+</tr>
+</tbody></table>
+
+<p><a href="https://antbucket.herokuapp.com/tester" target="_blank">Try it out</a></p>
+
+<aside class="success">
+Rember to pass in the bucket lists id for the associated item, in this case 1
+</aside>
+
+<h2 id="updating-an-item">updating an item</h2>
+
+<blockquote>
+<p>HTTP Status: 201 </p>
+</blockquote>
+<pre class="highlight shell"><code>curl -i -X PUT -d <span class="s2">"name=see her parent"</span> <span class="se">\</span>
+https://antbucket.herokuapp.com/api/v1/bucket_lists/1/items <span class="se">\</span>
+-H <span class="s2">"token: 029kdfsa0932a.xlkdsfiosdfds"</span>
+</code></pre>
+
+<blockquote>
+<p>The above should return JSON data in the format </p>
+</blockquote>
+<pre class="highlight json"><code><span class="w">  </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"see her parent"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-04-29T12:54:49.785Z"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-04-29T12:54:49.785Z"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">PUT https://antbucket.herokuapp.com/api/v1/bucket_lists/1/items</code> </p>
+
+<h3 id="query-parameters">Query Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>name</td>
+<td>a valid name</td>
+</tr>
+</tbody></table>
+
+<p><a href="https://antbucket.herokuapp.com/tester" target="_blank">Try it out</a></p>
+
+<aside class="success">
+Rember to pass in the bucket lists id for the associated item, in this case 1
+</aside>
+
+<h2 id="fetching-all-items">Fetching all items</h2>
+
+<blockquote>
+<p>HTTP Status: 200 </p>
+</blockquote>
+<pre class="highlight shell"><code>curl -i -X GET 
+https://antbucket.herokuapp.com/api/v1/bucket_lists/1/items <span class="se">\</span>
+-H <span class="s2">"token: 029kdfsa0932a.xlkdsfiosdfds"</span>
+</code></pre>
+
+<blockquote>
+<p>The above should return JSON data in the format </p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">[</span><span class="w">  
+  </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"see her parent"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-04-29T12:54:49.785Z"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-04-29T12:54:49.785Z"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+
+  </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"see her parent"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-04-29T12:54:49.785Z"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-04-29T12:54:49.785Z"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">GET https://antbucket.herokuapp.com/api/v1/bucket_lists/1/items</code> </p>
+
+<p><a href="https://antbucket.herokuapp.com/tester" target="_blank">Try it out</a></p>
+
+<aside class="success">
+Rember to pass in the bucket lists id for the associated item, in this case 1
+</aside>
+
+<h2 id="fetching-a-single-item">Fetching a single item</h2>
+
+<blockquote>
+<p>HTTP Status: 200 </p>
+</blockquote>
+<pre class="highlight shell"><code>curl -i -X GET 
+https://antbucket.herokuapp.com/api/v1/bucket_lists/1/items/1 <span class="se">\</span>
+-H <span class="s2">"token: 029kdfsa0932a.xlkdsfiosdfds"</span>
+</code></pre>
+
+<blockquote>
+<p>The above should return JSON data in the format </p>
+</blockquote>
+<pre class="highlight json"><code><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"see her parent"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-04-29T12:54:49.785Z"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-04-29T12:54:49.785Z"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+
+</span></code></pre>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">GET https://antbucket.herokuapp.com/api/v1/bucket_lists/1/items/1</code> </p>
+
+<p><a href="https://antbucket.herokuapp.com/tester" target="_blank">Try it out</a></p>
+
+<aside class="success">
+Rember to pass in the bucket lists id for the associated item, in this case 1
+</aside>
+
+<h2 id="deleting-an-item">Deleting an item</h2>
+
+<blockquote>
+<p>HTTP Status: 200 </p>
+</blockquote>
+<pre class="highlight shell"><code>curl -i -X DELETE 
+https://antbucket.herokuapp.com/api/v1/bucket_lists/1/items/1 <span class="se">\</span>
+-H <span class="s2">"token: 029kdfsa0932a.xlkdsfiosdfds"</span>
+</code></pre>
+
+<blockquote>
+<p>The above should return JSON data in the format </p>
+</blockquote>
+<pre class="highlight json"><code><span class="w">  </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"deleted successfully"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">GET https://antbucket.herokuapp.com/api/v1/bucket_lists/1/items/1</code> </p>
+
+<p><a href="https://antbucket.herokuapp.com/tester" target="_blank">Try it out</a></p>
+
+<aside class="success">
+Rember to pass in the bucket lists id for the associated item, in this case 1
+</aside>
+
+      </div>
+      <div class="dark-box">
+          <div class="lang-selector">
+                <a href="#" data-language-name="shell">cURL</a>
+          </div>
+      </div>
+    </div>
+  </body>
+</html>

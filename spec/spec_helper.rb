@@ -1,3 +1,10 @@
+require 'codeclimate-test-reporter'
+CodeClimate::TestReporter.start
+require 'coveralls'
+require 'simplecov'
+Coveralls.wear!
+SimpleCov.start
+
 require File.expand_path('../../config/environment', __FILE__)
 require 'rspec/rails'
 
