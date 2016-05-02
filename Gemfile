@@ -5,14 +5,17 @@ gem 'rails-api'
 gem 'sqlite3'
 gem 'devise'
 gem 'active_model_serializers'
-gem 'rack-cors', :require => 'rack/cors'
+gem 'rack-cors', require: 'rack/cors'
 gem 'jwt'
 
-group :development, :test do 
+group :development, :test do
   gem 'spring'
   gem 'rspec-rails', '~> 3.0'
   gem 'shoulda-matchers', '~> 3.1'
   gem 'factory_girl_rails'
   gem 'ffaker'
   gem 'pry-rails'
-end 
+  gem 'coveralls', require: false
+  gem 'codeclimate-test-reporter', require: nil
+  gem 'simplecov', require: false
+end

@@ -1,0 +1,14 @@
+Documentation:
+    Enabled: false
+AllCops:
+  Exclude:
+    - "vendor/**/*"
+    - "db/**"
+    - "bin/**"
+    - "config/**"
+    - "app/assets/*"
+    - "spec/rails_helper.rb"
+    - script/**
+    - Rakefile
+    - config.ru
+  UseCache: false

@@ -1,6 +1,6 @@
 <h1>Ant Bucket</h1>
 <hr />
-[![Coverage Status](https://coveralls.io/repos/github/andela-sdamian/ant-bucket/badge.svg?branch=master)](https://coveralls.io/github/andela-sdamian/ant-bucket?branch=master) [![Code Climate](https://codeclimate.com/github/andela-sdamian/ant-bucket/badges/gpa.svg)](https://codeclimate.com/github/andela-sdamian/ant-bucket) [![Build Status](https://travis-ci.org/andela-sdamian/ant-bucket.svg?branch=master)](https://travis-ci.org/andela-sdamian/ant-bucket)
+[![Coverage Status](https://coveralls.io/repos/github/andela-sdamian/antbucket/badge.svg?branch=master)](https://coveralls.io/github/andela-sdamian/antbucket?branch=master) [![Code Climate](https://codeclimate.com/github/andela-sdamian/antbucket/badges/gpa.svg)](https://codeclimate.com/github/andela-sdamian/antbucket) [![Build Status](https://travis-ci.org/andela-sdamian/antbucket.svg?branch=master)](https://travis-ci.org/andela-sdamian/antbucket)
 
 <h3>Getting Started</h3>
 
@@ -23,24 +23,19 @@ All our dependencies can be found in our Gemfile. To see a list of all our depen
 </tr>
 
 <tr>
-  <td>POST /api/v1: </td>
+  <td>POST /api/v1/user: </td>
   <td>Create a new user</td>
 </tr>
 
 
 <tr>
-	<td>GET /auth/login: </td>
-	<td>Logs a user in</td>
+	<td>POST /auth/login: </td>
+	<td>Logs in a user</td>
 </tr>
 
 <tr>
-	<td>GET /auth/login: </td>
-	<td>Logs a user in</td>
-</tr>
-
-<tr>
-	<td>GET /auth/logout:</td>
-	<td>Logs a user out</td>
+	<td>DELETE /auth/logout:</td>
+	<td>Logs out a user</td>
 </tr>
 
 <tr>
