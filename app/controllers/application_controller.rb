@@ -30,4 +30,14 @@ class ApplicationController < ActionController::API
   def not_found(e)
     render json: { error: e.message }, status: :not_found
   end
+
+  def paginate(obj)
+    @limit = Paginator.limit(params[:limit])
+    @offset = @limit * Paginator.page(params[:page])
+    {
+      total: obj.count, 
+      page: Paginator.total_pages(obj.count),
+      bucket_lists: obj.limit(@limit).offset(@offset) 
+    }
+  end
 end
