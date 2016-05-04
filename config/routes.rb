@@ -12,7 +12,9 @@ Rails.application.routes.draw do
               sign_in: 'auth/login',
               sign_out: 'auth/logout'
             }
-      resources :bucket_lists            
+      resources :bucket_lists do 
+        resources :items
+      end            
     end
   end
   get '/', :to => redirect('/api/docs/index.html')
