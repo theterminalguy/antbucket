@@ -14,15 +14,15 @@ module Api
       def create
         user_email = params[:email]
         user_password = params[:password]
-        user = user_email.present? && User.find_by(email: user_email)
-        if user.valid_password? user_password
+        user = user_email.present? && User.find_by(email: user_email)      
+        if user.nil? || !user.valid_password?(user_password)
+          render json: { errors: 'invalid user name or password' }, status: 422
+        else user.valid_password? user_password
           sign_in user, store: false
           user.update(online: true)
           token = AuthToken.issue(user_id: user.id)
           render json: { user_email: user.email, token: token }, status: 200
-        else
-          render json: { errors: 'invalid user name or password' }, status: 422
-        end
+        end 
       end
 
       # DELETE /auth/logout

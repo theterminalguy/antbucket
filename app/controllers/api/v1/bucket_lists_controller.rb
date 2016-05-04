@@ -12,6 +12,8 @@ module Api
            render json: { message: 'bucket list is empty' }
          elsif params[:q]
           render json: @bucket_lists.find_by_name(params[:q])
+        elsif params[:page].nil? && params[:limit].nil? 
+          render json: @bucket_lists 
          else  
           render json: paginate(@bucket_lists)
          end 
