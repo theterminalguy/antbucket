@@ -1,10 +1,6 @@
 FactoryGirl.define do
-  sequence :name do |n|
-    "Bucket_list#{n}"
-  end
-    
   factory :bucket_list do
+    sequence(:name) {|n| "name#{n}"}
     user
-    name
   end
 end
