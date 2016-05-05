@@ -21,4 +21,6 @@ RSpec.configure do |config|
   end
 
   config.include Request::JsonHelpers, type: :controller
+  config.include ApiControllerHelper, type: :controller
+  config.include FactoryGirl::Syntax::Methods
 end

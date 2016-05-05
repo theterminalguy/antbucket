@@ -1,4 +1,4 @@
-module Api 
+module Api
   module V1
     class ItemsController < ApplicationController
       before_action :authenticate
@@ -9,9 +9,9 @@ module Api
         @items = Item.all
         if @items.empty?
           render json: { message: 'item is empty' }
-        else 
+        else
           render json: @items
-        end 
+        end
       end
 
       # GET /items/1
@@ -45,18 +45,18 @@ module Api
       def destroy
         @item.destroy
 
-        render json: { message: "deleted successfully" }, status: 410 
+        render json: { message: 'deleted successfully' }, status: 410
       end
 
       private
 
-        def set_item
-          @item = Item.find(params[:id])
-        end
+      def set_item
+        @item = Item.find(params[:id])
+      end
 
-        def item_params
-          params.permit(:bucket_list_id, :name, :done, :default)
-        end
+      def item_params
+        params.permit(:bucket_list_id, :name, :done, :default)
+      end
     end
-  end 
-end 
+  end
+end

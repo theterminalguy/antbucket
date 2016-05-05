@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe Api::V1::SessionsController, type: :controller do
   before(:each) do
-    @user = FactoryGirl.create(:user)
+    @user = create :user
   end
 
   describe 'POST #create' do
@@ -45,7 +45,7 @@ RSpec.describe Api::V1::SessionsController, type: :controller do
 
   describe 'DELETE #destroy' do
     before(:each) do
-      allow(controller).to receive(:current_user).and_return(@user)
+      stub_curent_user(@user)
       delete :destroy, nil, token: token
     end
 

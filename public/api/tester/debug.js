@@ -1,4 +1,15 @@
-var host_url = "http://localhost:3000/api/v1/"
+function get_host() {
+  var url = "",
+  host = location.host + "/api/v1/";  
+  if(location.hostname == "localhost"){
+    url = "http://" +  host
+  }else {
+    url = "https://" + host
+  }
+  return url 
+}
+var host_url = get_host(); 
+
 function showHeaders() {
 	showAuthHeaders();
 	showHeaderHeaders();
