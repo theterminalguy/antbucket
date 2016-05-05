@@ -1,12 +1,17 @@
 class ApplicationController < ActionController::API
-  rescue_from ActiveRecord::RecordNotFound, with: :not_found
-  rescue_from JWT::ExpiredSignature, with: :expired_token
+  rescue_from ActiveRecord::RecordNotFound do |e|
+    render json: { error: e.message }, status: :not_found
+  end
+
+  rescue_from JWT::ExpiredSignature do |e|
+    render json: { error: e.message }, status: :unauthorized
+  end
+
+  private
 
   def current_user
     @current_user ||= User.find_by(id: token['user_id'], online: true)
   end
-
-  private
 
   def authenticate
     if token.key?(:error)
@@ -21,23 +26,5 @@ class ApplicationController < ActionController::API
 
   def token
     AuthToken.decode(request.headers['token'])
-  end
-
-  def expired_token(e)
-    render json: { error: e.message }, status: :unauthorized
-  end
-
-  def not_found(e)
-    render json: { error: e.message }, status: :not_found
-  end
-
-  def paginate(obj)
-    @limit = Paginator.limit(params[:limit])
-    @offset = @limit * Paginator.page(params[:page])
-    {
-      total: obj.count, 
-      page: Paginator.total_pages(obj.count),
-      bucket_lists: obj.limit(@limit).offset(@offset) 
-    }
   end
 end

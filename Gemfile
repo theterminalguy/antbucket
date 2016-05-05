@@ -7,9 +7,9 @@ gem 'active_model_serializers'
 gem 'rack-cors', require: 'rack/cors'
 gem 'jwt'
 
-group :production do 
+group :production do
   gem 'pg'
-end 
+end
 
 group :development, :test do
   gem 'sqlite3'
