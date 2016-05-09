@@ -8,37 +8,28 @@ RSpec.describe Api::V1::SessionsController, type: :controller do
   describe 'POST #create' do
     context 'when the credentials are correct' do
       before(:each) do
-        credentials = { email: @user.email, password: '1234567' }
-        post :create, credentials
+        @credentials = { email: @user.email, password: '1234567' }
       end
 
       it "returns the user's email and token if login successfully" do
+        post :create, @credentials
         expect(json_response.keys).to include(:user_email, :token)
-      end
-
-      it 'email should be valid' do
         expect(json_response[:user_email]).to eq @user.email
-      end
-
-      it 'returns a valid token' do
         expect(json_response[:token]).to_not be_empty
+        expect(response.status).to eq 200
       end
-
-      it { should respond_with 200 }
     end
 
     context 'when the credentials are incorrect' do
       before(:each) do
-        credentials = { email: @user.email, password: '1234' }
-        post :create, credentials
+        @credentials = { email: @user.email, password: '1234' }
       end
 
       it 'returns a hash with key errors' do
+        post :create, @credentials
         expect(json_response).to include(:errors)
-      end
-
-      it 'returns a detailed error message' do
         expect(json_response[:errors]).to eq 'invalid user name or password'
+        expect(response.status).to eq 422
       end
     end
   end
@@ -51,9 +42,9 @@ RSpec.describe Api::V1::SessionsController, type: :controller do
 
     context 'when users signs out successfully' do
       it 'returns a detailed error message' do
-        expect(json_response[:message]).to eq 'signed out successfully'
+        expect(json_response[:message]).to eq 'logout successfully'
+        expect(response.status).to eq 200
       end
-      it { should respond_with 410 }
     end
   end
 end

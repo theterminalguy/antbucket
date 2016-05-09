@@ -10,7 +10,7 @@ require 'rspec/rails'
 
 Dir[::Rails.root.join('spec/support/**/*.rb')].each { |f| require f }
 
-RSpec.configure do |config|
+RSpec.configure do |config| 
   config.expect_with :rspec do |expectations|
     config.raise_errors_for_deprecations!
     expectations.include_chain_clauses_in_custom_matcher_descriptions = true
@@ -22,5 +22,8 @@ RSpec.configure do |config|
 
   config.include Request::JsonHelpers, type: :controller
   config.include ApiControllerHelper, type: :controller
+  config.include Request::JsonHelpers, type: :request 
+  config.include ApiControllerHelper, type: :request 
+  
   config.include FactoryGirl::Syntax::Methods
 end
