@@ -1,4 +1,6 @@
 class ApplicationController < ActionController::API
+  include ActionController::Serialization
+
   rescue_from ActiveRecord::RecordNotFound do |e|
     render json: { error: e.message }, status: :not_found
   end
@@ -16,7 +18,7 @@ class ApplicationController < ActionController::API
   def authenticate
     if token.key?(:error)
       render json: token, status: :unauthorized
-      return false
+      return
     end
 
     if !token || current_user.nil?

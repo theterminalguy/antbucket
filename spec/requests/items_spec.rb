@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe "Items", type: :request do
+RSpec.describe 'Items', type: :request do
   before(:each) do
     @user = create(:user)
     stub_curent_user(@user)
@@ -27,7 +27,7 @@ RSpec.describe "Items", type: :request do
       it 'returns the appropriate record' do
         get api_v1_bucket_list_items_path(@item.bucket_list_id)
         expect(json_response.count).to eq 1
-        expect(response.status).to eq 200 
+        expect(response.status).to eq 200
       end
     end
   end
@@ -39,10 +39,10 @@ RSpec.describe "Items", type: :request do
       end
 
       it 'returns the record with the id' do
-        get api_v1_bucket_list_item_path(@item.bucket_list_id,@item.id)
+        get api_v1_bucket_list_item_path(@item.bucket_list_id, @item.id)
         item_data = json_response[:item]
         expect(item_data[:id]).to eq @item.id
-        expect(response.status).to eq 200 
+        expect(response.status).to eq 200
       end
     end
   end
@@ -57,7 +57,7 @@ RSpec.describe "Items", type: :request do
         post api_v1_bucket_list_items_path(@item[:bucket_list_id]), @item
         item_data = json_response[:item]
         expect(item_data[:name]).to eq @item[:name]
-        expect(response.status).to eq 201 
+        expect(response.status).to eq 201
       end
     end
 
@@ -70,7 +70,7 @@ RSpec.describe "Items", type: :request do
       it 'returns detailed error message' do
         post api_v1_bucket_list_items_path(@item[:bucket_list_id]), @item
         expect(json_response[:name]).to eq ["can't be blank"]
-        expect(response.status).to eq 422 
+        expect(response.status).to eq 422
       end
     end
   end
@@ -83,11 +83,11 @@ RSpec.describe "Items", type: :request do
       end
 
       it 'should update the record' do
-        put api_v1_bucket_list_item_path(@item.bucket_list_id, @item.id), 
-                                         name: @item.name
+        put api_v1_bucket_list_item_path(@item.bucket_list_id, @item.id),
+            name: @item.name
         item_data = json_response[:item]
         expect(item_data[:name]).to eq @item.name
-        expect(response.status).to eq 200 
+        expect(response.status).to eq 200
       end
     end
   end
@@ -98,12 +98,11 @@ RSpec.describe "Items", type: :request do
         @item = create :item
       end
 
-      it do 
+      it do
         delete api_v1_bucket_list_item_path(@item.bucket_list_id, @item.id),
-                         name: @item.name
-        expect(response.status).to eq 200 
-      end 
+               name: @item.name
+        expect(response.status).to eq 200
+      end
     end
   end
-
 end

@@ -27,7 +27,7 @@ RSpec.describe Api::V1::ItemsController, type: :controller do
       it 'returns the appropriate record' do
         get :index, bucket_list_id: @item.bucket_list_id
         expect(json_response.count).to eq 1
-        expect(response.status).to eq 200 
+        expect(response.status).to eq 200
       end
     end
   end
@@ -42,7 +42,7 @@ RSpec.describe Api::V1::ItemsController, type: :controller do
         get :show, bucket_list_id: @item.bucket_list_id, id: @item.id
         item_data = json_response[:item]
         expect(item_data[:id]).to eq @item.id
-        expect(response.status).to eq 200 
+        expect(response.status).to eq 200
       end
     end
   end
@@ -57,7 +57,7 @@ RSpec.describe Api::V1::ItemsController, type: :controller do
         post :create, @item
         item_data = json_response[:item]
         expect(item_data[:name]).to eq @item[:name]
-        expect(response.status).to eq 201 
+        expect(response.status).to eq 201
       end
     end
 
@@ -70,7 +70,7 @@ RSpec.describe Api::V1::ItemsController, type: :controller do
       it 'returns detailed error message' do
         post :create, @item
         expect(json_response[:name]).to eq ["can't be blank"]
-        expect(response.status).to eq 422 
+        expect(response.status).to eq 422
       end
     end
   end
@@ -88,7 +88,7 @@ RSpec.describe Api::V1::ItemsController, type: :controller do
                      name: @item.name
         item_data = json_response[:item]
         expect(item_data[:name]).to eq @item.name
-        expect(response.status).to eq 200 
+        expect(response.status).to eq 200
       end
     end
   end
@@ -99,12 +99,12 @@ RSpec.describe Api::V1::ItemsController, type: :controller do
         @item = create :item
       end
 
-      it do 
+      it do
         delete :destroy, bucket_list_id: @item.bucket_list_id,
                          id: @item.id,
                          name: @item.name
-        expect(response.status).to eq 200 
-      end 
+        expect(response.status).to eq 200
+      end
     end
   end
 end

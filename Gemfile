@@ -19,6 +19,7 @@ group :development, :test do
   gem 'factory_girl_rails'
   gem 'ffaker'
   gem 'pry-rails'
+  gem 'database_cleaner'
   gem 'coveralls', require: false
   gem 'codeclimate-test-reporter', require: nil
   gem 'simplecov', require: false

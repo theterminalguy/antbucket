@@ -2,21 +2,17 @@ module Api
   module V1
     class BucketListsController < ApplicationController
       before_action :authenticate
-      before_action :set_params, only: :index
       before_action :set_bucket_list, only: [:show, :update, :destroy]
       before_action :check_owner, only: [:show, :update, :destroy]
 
       # GET /bucket_lists
       def index
-        @bucket_lists = current_user.bucket_lists
-        if @bucket_lists.empty?
+        bucket_lists = current_user.bucket_lists
+        result = Paginator.new(params).paginate(bucket_lists, [:id, :name])
+        if bucket_lists.empty?
           render json: { message: 'bucket list is empty' }
-        elsif @q
-          render json: @bucket_lists.find_by_name(@q)
-        elsif @page.nil? && @limit.nil?
-          render json: @bucket_lists
         else
-          render json: Paginator.paginate(@bucket_lists, @limit, @page)
+          render json: result
         end
       end
 
@@ -47,19 +43,13 @@ module Api
       # DELETE /bucket_lists/1
       def destroy
         @bucket_list.destroy
-        render json: { message: 'deleted successfully' }, status: 410
+        render json: { message: 'deleted successfully' }
       end
 
       private
 
       def set_bucket_list
         @bucket_list = BucketList.find(params[:id])
-      end
-
-      def set_params
-        @q = params[:q]
-        @page = params[:page]
-        @limit = params[:limit]
       end
 
       def check_owner
