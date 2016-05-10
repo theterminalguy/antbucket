@@ -1,14 +1,14 @@
 require 'rails_helper'
 
-RSpec.describe Api::V1::UsersController, type: :controller do
-  describe 'POST #create' do
+RSpec.describe 'Users', type: :request do
+  describe 'POST /users' do
     before(:each) do
       @user = FactoryGirl.attributes_for :user
     end
 
     context 'when a user successfully creates an account' do
       it 'should return the user details in JSON format' do
-        post :create, @user, format: :json
+        post api_v1_users_path, @user
         user_response = json_response[:user_data]
         expect(user_response[:email]).to eq @user[:email]
         expect(response.status).to eq 200
@@ -21,7 +21,7 @@ RSpec.describe Api::V1::UsersController, type: :controller do
       end
 
       it 'returns error message in JSON' do
-        post :create, @invalid_data
+        post api_v1_users_path, @invalid_data
         user_response = json_response
         expect(user_response).to have_key(:errors)
         expect(response.status).to eq 422
