@@ -10,7 +10,7 @@ module Api
         password = params[:password]
         user = email.present? && User.find_by(email: email)
         if user.nil? || !user.valid_password?(password)
-          render json: { errors: 'invalid user name or password' }, status: 422
+          render json: { errors: error.login }, status: 422
           return
         end
         user.valid_password? password
@@ -22,7 +22,7 @@ module Api
       # DELETE /auth/logout
       def destroy
         current_user.logout
-        render json: { message: 'logout successfully' }
+        render json: { message: success.logout }
       end
     end
   end

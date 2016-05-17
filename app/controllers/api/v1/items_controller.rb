@@ -8,7 +8,7 @@ module Api
       def index
         @items = Item.all
         if @items.empty?
-          render json: { message: 'item is empty' }
+          render json: { message: success.empty }
         else
           render json: @items
         end
@@ -45,7 +45,7 @@ module Api
       def destroy
         @item.destroy
 
-        render json: { message: 'deleted successfully' }
+        render json: { message: success.deleted }
       end
 
       private

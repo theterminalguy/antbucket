@@ -10,7 +10,7 @@ module Api
         bucket_lists = current_user.bucket_lists
         result = Paginator.new(params).paginate(bucket_lists, [:id, :name])
         if bucket_lists.empty?
-          render json: { message: 'bucket list is empty' }
+          render json: { message: success.empty }
         else
           render json: result
         end
@@ -43,7 +43,7 @@ module Api
       # DELETE /bucket_lists/1
       def destroy
         @bucket_list.destroy
-        render json: { message: 'deleted successfully' }
+        render json: { message: success.deleted }
       end
 
       private
@@ -54,7 +54,7 @@ module Api
 
       def check_owner
         if current_user.id != @bucket_list.user_id
-          render json: { message: 'unauthorized access' }, status: 403
+          render json: { message: error.denial }, status: 403
         end
       end
 

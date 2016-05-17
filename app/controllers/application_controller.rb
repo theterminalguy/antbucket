@@ -9,6 +9,14 @@ class ApplicationController < ActionController::API
     render json: { error: e.message }, status: :unauthorized
   end
 
+  def success 
+    Message::Success.new 
+  end
+
+  def error 
+    Message::Error.new 
+  end 
+
   private
 
   def current_user
@@ -22,7 +30,7 @@ class ApplicationController < ActionController::API
     end
 
     if !token || current_user.nil?
-      render json: { message: 'unauthorized access' }, status: :unauthorized
+      render json: { message: error.denial }, status: :unauthorized
     end
   end
 
