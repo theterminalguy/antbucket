@@ -28,7 +28,7 @@ RSpec.describe Api::V1::SessionsController, type: :controller do
       it 'returns a hash with key errors' do
         post :create, @credentials
         expect(json_response).to include(:errors)
-        expect(json_response[:errors]).to eq 'invalid user name or password'
+        expect(json_response[:errors]).to eq msg_error.login 
         expect(response.status).to eq 422
       end
     end
@@ -42,7 +42,7 @@ RSpec.describe Api::V1::SessionsController, type: :controller do
 
     context 'when users signs out successfully' do
       it 'returns a detailed error message' do
-        expect(json_response[:message]).to eq 'logout successfully'
+        expect(json_response[:message]).to eq msg_success.logout 
         expect(response.status).to eq 200
       end
     end

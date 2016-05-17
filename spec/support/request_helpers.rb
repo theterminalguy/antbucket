@@ -10,5 +10,13 @@ module Request
       post :create, credentials
       json_response[:token]
     end
+
+    def msg_success 
+      success_message ||= Message::Success.new 
+    end 
+
+    def msg_error 
+      error_message ||= Message::Error.new 
+    end 
   end
 end
