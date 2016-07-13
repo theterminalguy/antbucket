@@ -2,7 +2,7 @@ require 'jwt'
 
 class AuthToken
   def self.issue(payload)
-    payload[:exp] = 2.hours.from_now.to_i
+    payload[:exp] = 30.days.from_now.to_i
     JWT.encode(payload, Rails.application.secrets.secret_key_base, 'HS256')
   end
 
