@@ -2,11 +2,13 @@ module Api
   module V1
     class ItemsController < ApplicationController
       before_action :authenticate
+      before_action :set_bucket, only: [:index, :show, :update, :destroy]
       before_action :set_item, only: [:show, :update, :destroy]
 
       # GET /items
-      def index
-        @items = Item.all
+
+      def index  
+        @items = @bucket_list.items
         if @items.empty?
           render json: { message: success.empty }
         else
@@ -15,6 +17,7 @@ module Api
       end
 
       # GET /items/1
+
       def show
         render json: @item
       end
@@ -32,8 +35,6 @@ module Api
 
       # PATCH/PUT /items/1
       def update
-        @item = Item.find(params[:id])
-
         if @item.update(item_params)
           render json: @item
         else
@@ -50,9 +51,13 @@ module Api
 
       private
 
-      def set_item
-        @item = Item.find(params[:id])
+      def set_bucket 
+        @bucket_list = current_user.bucket_lists.find(params[:bucket_list_id]) 
       end
+
+      def set_item 
+        @item = @bucket_list.items.find(params[:id])
+      end 
 
       def item_params
         params.permit(:bucket_list_id, :name, :done, :default)
