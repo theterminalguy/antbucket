@@ -9,13 +9,13 @@ class ApplicationController < ActionController::API
     render json: { error: e.message }, status: :unauthorized
   end
 
-  def success 
-    Message::Success.new 
+  def success
+    Message::Success.new
   end
 
-  def error 
-    Message::Error.new 
-  end 
+  def error
+    Message::Error.new
+  end
 
   private
 
