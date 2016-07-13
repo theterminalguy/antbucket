@@ -37,7 +37,7 @@ RSpec.describe 'BucketLists', type: :request do
 
     context 'when given page and limit parameter' do
       it 'returns the appropriate record based on the parameter' do
-        2.times {create(:bucket_list, user: user)}
+        2.times { create(:bucket_list, user: user) }
         get api_v1_bucket_lists_path, page: 1, limit: 1
         expect(json_response[:total_records]).to eq 2
         expect(response.status).to eq 200
@@ -69,7 +69,7 @@ RSpec.describe 'BucketLists', type: :request do
       it 'returns an error message' do
         bucket_list = create(:bucket_list)
         get api_v1_bucket_list_path(bucket_list.id)
-        expect(json_response[:message]).to eq msg_error.denial 
+        expect(json_response[:message]).to eq msg_error.denial
         expect(response.status).to eq 403
       end
     end
@@ -88,7 +88,7 @@ RSpec.describe 'BucketLists', type: :request do
       it 'should return an error message' do
         bucket_list = { user: user, name: nil }
         post api_v1_bucket_lists_path, bucket_list
-        expect(json_response[:name]).to eq msg_error.blank 
+        expect(json_response[:name]).to eq msg_error.blank
       end
     end
   end
@@ -105,8 +105,8 @@ RSpec.describe 'BucketLists', type: :request do
     context 'when name is not given' do
       it 'should fail to update' do
         bucket_list = create(:bucket_list, user: user)
-        put api_v1_bucket_list_path(bucket_list.id), name: nil 
-        expect(json_response[:name]).to eq msg_error.blank 
+        put api_v1_bucket_list_path(bucket_list.id), name: nil
+        expect(json_response[:name]).to eq msg_error.blank
         expect(response.status).to eq 422
       end
     end
@@ -124,12 +124,12 @@ RSpec.describe 'BucketLists', type: :request do
     context 'when invalid id is provided' do
       it 'should fail to delete and return a detailed message' do
         bucket_list = create(:bucket_list, user: user)
-    
+
         delete api_v1_bucket_list_path(-1)
         expect(
           json_response[:error]
         ).to eq msg_error.not_found('BucketList', '-1')
-        expect(response.status).to eq 404 
+        expect(response.status).to eq 404
       end
     end
   end

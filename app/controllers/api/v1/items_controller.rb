@@ -7,7 +7,7 @@ module Api
 
       # GET /items
 
-      def index  
+      def index
         @items = @bucket_list.items
         if @items.empty?
           render json: { message: success.empty }
@@ -51,13 +51,13 @@ module Api
 
       private
 
-      def set_bucket 
-        @bucket_list = current_user.bucket_lists.find(params[:bucket_list_id]) 
+      def set_bucket
+        @bucket_list = current_user.bucket_lists.find(params[:bucket_list_id])
       end
 
-      def set_item 
+      def set_item
         @item = @bucket_list.items.find(params[:id])
-      end 
+      end
 
       def item_params
         params.permit(:bucket_list_id, :name, :done, :default)

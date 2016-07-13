@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe 'Users', type: :request do
-  let(:user) {FactoryGirl.attributes_for :user}
+  let(:user) { FactoryGirl.attributes_for :user }
 
   describe 'POST /users' do
     context 'when a user successfully creates an account' do
